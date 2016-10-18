@@ -57,26 +57,26 @@ public class ${classname}Controller {
     public String list(${classname} ${instance}, @RequestParam(value = "pageNo", defaultValue = Constants.DEFAULT_PAGE_NO) int pageNo,
 			@RequestParam(value = "pageSize", defaultValue = Constants.DEFAULT_PAGE_SIZE) int pageSize, Model model) {
         
-      try {
-        /**
-         * 执行业务查询
-         */
-        PageHelper.startPage(pageNo, pageSize);
-        //PageHelper.orderBy("ID ASC");
-        List<${classname}> ${instance}List = ${instance}Service.select(${instance});
-        
-        /**
-         * 封装分页参数
-         */
-        PageInfo<${classname}> page = new PageInfo<${classname}>(${instance}List);
-
-        model.addAttribute("pageNo", pageNo);
-        model.addAttribute("pageSize", pageSize);
-        model.addAttribute("page", page);
-      } catch (Exception e) {
-        LOG.error("查询列表出错!", e);
-      }
-      return VIEW_TO_LIST;
+		try {
+			/**
+			 * 执行业务查询
+			 */
+			PageHelper.startPage(pageNo, pageSize);
+			//PageHelper.orderBy("ID ASC");
+			List<${classname}> ${instance}List = ${instance}Service.select(${instance});
+			
+			/**
+			 * 封装分页参数
+			 */
+			PageInfo<${classname}> page = new PageInfo<${classname}>(${instance}List);
+			
+			model.addAttribute("pageNo", pageNo);
+			model.addAttribute("pageSize", pageSize);
+			model.addAttribute("page", page);
+		} catch (Exception e) {
+			LOG.error("查询列表出错!", e);
+		}
+      	return VIEW_TO_LIST;
     }
     
     /**
