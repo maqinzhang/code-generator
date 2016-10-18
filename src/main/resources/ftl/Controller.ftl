@@ -38,7 +38,7 @@ public class ${classname}Controller {
 
     private Logger LOG = LoggerFactory.getLogger(getClass());
 	
-	/** 列表表头+查询条件视图 **/
+    /** 列表表头+查询条件视图 **/
     private static final String VIEW_TO_LIST = "${module}/${instance}List";
     /** 列表内容视图 **/
     private static final String VIEW_TO_LIST_CONTENT = "${module}/${instance}ListContent";
