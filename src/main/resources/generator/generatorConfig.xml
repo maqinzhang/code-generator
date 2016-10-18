@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<generatorConfiguration>
+	<!-- tips： 1、执行mvn code-generator:generate命令，生成代码 2、生成的文件位置可自行调整 -->
+	<author>
+		<name>MaQinZh</name>
+		<phone>15651781151</phone>
+		<email>maqinzhang@qq.com</email>
+	</author>
+
+	<jdbcConnection>
+   		<driverClass>oracle.jdbc.OracleDriver</driverClass>
+		<connectionURL>jdbc:oracle:thin:@10.2.48.12:1521:orcl</connectionURL>
+		<username>zz</username>
+		<password>zz</password>
+	</jdbcConnection>
+
+	<!-- 生成的java 相对所在位置 -->
+	<javaProjectGenerator>
+		<targetPackage>love.crossroad</targetPackage>
+		<targetProject>E:/ymdq-java</targetProject>
+		<targetWebView>E:/ymdq-java/view/jsp</targetWebView>
+	</javaProjectGenerator>
+
+	<table>
+	    <tableName>EAS_EX_ROOM</tableName>
+	    <tableDesc>房间管理</tableDesc>
+	    <module>room</module>
+	</table>
+
+</generatorConfiguration>
