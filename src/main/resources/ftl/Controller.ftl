@@ -144,18 +144,18 @@ public class ${classname}Controller {
 	
 			try {
 				/**
-         * 根据主键是否存在，判断是新增还是更新记录
-         */
+		         * 根据主键是否存在，判断是新增还是更新记录
+		         */
 				if (ObjectUtils.isEmpty(${instance}.getId())) {
 					/**
-           * 新增记录
-           */
+					 * 新增记录
+					 */
 					//${instance}.setCreateTime(DateTime.now().toDate());
 					${instance}Service.save(${instance});
 				} else {
 					/**
-           * 更新记录
-           */
+					  * 更新记录
+					  */
 					${instance}Service.update(${instance});
 				}
 				resMap.put("success", true);

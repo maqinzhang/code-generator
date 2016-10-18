@@ -18,6 +18,6 @@ import ${package}.core.service.BaseService;
 @Service
 public class ${classname}Service extends BaseService<${classname}> {
 
-  @Resource
+  	@Resource
 	private ${classname}Mapper ${instance}Mapper;
 }
