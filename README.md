@@ -1,2 +1,1 @@
-# code-generator
-# 自定义代码生成工具
+# code-generator（自定义生成代码工具）
