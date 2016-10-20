@@ -24,11 +24,11 @@
 						<td>${r"${record."}${columnMetaData.fieldName}}</td>
 						</#list>
 						<td>
-							<a href="javascript:edit('${r"${record.id}"}')">编辑</a>
+							<a href="javascript:edit('${r"${record."}${id}${r"}"}')">编辑</a>
 							&nbsp;&nbsp;
-							<a href="javascript:_delete('${r"${record.id}"}')">删除</a>
+							<a href="javascript:_delete('${r"${record."}${id}${r"}"}')">删除</a>
 							&nbsp;&nbsp;
-							<a href="javascript:detail('${r"${record.id}"}')">详情</a>
+							<a href="javascript:detail('${r"${record."}${id}${r"}"}')">详情</a>
 						</td> 
 					</tr>
 				</c:forEach>
@@ -42,4 +42,4 @@
 	</tbody>
 </table>
 
-<diy:page formId="searchForm" async="true" pageSize="${r"${page.pageSize}"}" page="${r"${page}"}" gotoURI="${instance}/${instance}PageContent"></diy:page>
+<diy:page formId="searchForm" async="true" pageSize="${r"${page.pageSize}"}" page="${r"${page}"}" gotoURI="${instance}/${instance}ListContent"></diy:page>

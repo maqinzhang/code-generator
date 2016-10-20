@@ -142,13 +142,15 @@ public final class SpyUtil {
 		case Types.INTEGER:
 		case Types.SMALLINT:
 		case Types.TINYINT:
-			typeName = "int";
+			typeName = "Integer";
 			break;
 		case Types.DECIMAL:
+			typeName = "Long";
+			break;
 		case Types.DOUBLE:
 		case Types.FLOAT:
 		case Types.NUMERIC:
-			typeName = "double";
+			typeName = "Double";
 			break;
 		case Types.CHAR:
 		case Types.CLOB:

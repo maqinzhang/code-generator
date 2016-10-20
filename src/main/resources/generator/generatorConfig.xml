@@ -22,7 +22,8 @@
 	</javaProjectGenerator>
 
 	<table>
-	    <tableName>EAS_EX_ROOM</tableName>
+	    <tableName>user_info</tableName>
+	    <tablePk>user_id</tablePk>
 	    <tableDesc>房间管理</tableDesc>
 	    <module>room</module>
 	</table>

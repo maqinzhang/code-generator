@@ -35,6 +35,6 @@
 <script type="text/javascript">
 	/** 返回* */
 	$('#backBtn').click(function() {
-		loadPage('web/${instance}/list?' + locationUrl);
+		loadPage('${instance}/list?' + locationUrl);
 	});	
 </script>

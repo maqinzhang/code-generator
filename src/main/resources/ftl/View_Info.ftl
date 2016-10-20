@@ -8,7 +8,7 @@
 <form name="submitForm" id="submitForm" method="post">
 
 	<!-- 设置隐藏域的值 -->
-	<input type="hidden" id="id" name="id" value="${r"$"}{${instance}.id }" /> 
+	<input type="hidden" id="${id}" name="${id}" value="${r"$"}{${instance}.${r"${id}"} }" /> 
 
 	<div class="crumbs">
 		<!-- 导航菜单 -->

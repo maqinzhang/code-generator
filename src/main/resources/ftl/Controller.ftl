@@ -1,4 +1,4 @@
-package ${package}.web.${module};
+package ${package}.controller.${module};
 
 import java.util.HashMap;
 import java.util.List;
@@ -32,6 +32,7 @@ import ${package}.service.${module}.${classname}Service;
  * @since ${createDate}
  */
 <#assign instance = "${classname?uncap_first}">
+<#assign _id = "${id?cap_first}">
 @Controller
 @RequestMapping("/${module?replace('.', '/')}")
 public class ${classname}Controller {
@@ -113,21 +114,21 @@ public class ${classname}Controller {
      * 跳转到新增、修改信息页面
      */
     @RequestMapping("/info")
-    public Object info(Object id, Model model) throws Exception {
+    public Object info(Object ${id}, Model model) throws Exception {
     	try {
 			${classname} ${instance} = new ${classname}();
 			
 			/**
 			 * 主键不为空时，查询出需修改的数据信息
 			 */
-			if (!ObjectUtils.isEmpty(id)) {
+			if (!ObjectUtils.isEmpty(${id})) {
 				/**
 				 * 根据主键获取记录
 				 */
-				${instance} = ${instance}Service.selectById(id);
+				${instance} = ${instance}Service.selectById(${id});
 			}
 			
-			mode.addAttribute("${instance}", ${instance});
+			model.addAttribute("${instance}", ${instance});
 		} catch (Exception e) {
 			LOG.error("跳转到新增、修改信息页面出错!", e);
 		}
@@ -146,7 +147,7 @@ public class ${classname}Controller {
 			/**
 	         * 根据主键是否存在，判断是新增还是更新记录
 	         */
-			if (ObjectUtils.isEmpty(${instance}.getId())) {
+			if (ObjectUtils.isEmpty(${instance}.get${_id}())) {
 				/**
 				 * 新增记录
 				 */
@@ -172,16 +173,16 @@ public class ${classname}Controller {
      */
     @RequestMapping("/delete")
     @ResponseBody
-    public Object delete(Object id) throws Exception {
+    public Object delete(Object ${id}) throws Exception {
     	
 		Map<String, Object> resMap = new HashMap<String, Object>();
 			
 		try {
-			if (!ObjectUtils.isEmpty(id)) {
+			if (!ObjectUtils.isEmpty(${id})) {
 				/**
 				 * 删除记录
 				 */
-				${instance}Service.deleteById(id);
+				${instance}Service.deleteById(${id});
 			}
 			resMap.put("success", true);
 		} catch (Exception e) {
@@ -195,19 +196,19 @@ public class ${classname}Controller {
     /**
 	 * 查询详情
 	 */
-	@RequestMapping("/detail/{id}")
-	public String detail(@PathVariable Object id, Model mode) {
+	@RequestMapping("/detail/{${id}}")
+	public String detail(@PathVariable Object ${id}, Model model) {
 		try {
-			if (ObjectUtils.isEmpty(id)) {
-				throw new IllegalArgumentException("请传入正确的ID！");
+			if (ObjectUtils.isEmpty(${id})) {
+				throw new IllegalArgumentException("请传入正确的${id}！");
 			}
 	
 			/**
 			 * 获取记录
 			 */
-			${classname} ${instance} = ${instance}Service.selectById(id);
+			${classname} ${instance} = ${instance}Service.selectById(${id});
 	
-			mode.addAttribute("${instance}", ${instance});
+			model.addAttribute("${instance}", ${instance});
 		} catch (Exception e) {
 			LOG.error("查询详情出错！", e);
 		}

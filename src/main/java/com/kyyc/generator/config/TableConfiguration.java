@@ -16,35 +16,23 @@ public class TableConfiguration implements Serializable {
 
 	private static final long serialVersionUID = -8638828421944900088L;
 
-	@XmlElement(name = "module")
-	private String module;
-
 	@XmlElement(name = "tableName")
 	private String tableName;
+
+	@XmlElement(name = "tablePk")
+	private String tablePk;
 
 	@XmlElement(name = "tableDesc")
 	private String tableDesc;
 
-	/**
-	 * @return the module
-	 */
-	public String getModule() {
-		return module;
-	}
-
-	/**
-	 * @param module
-	 *            the module to set
-	 */
-	public void setModule(String module) {
-		this.module = module;
-	}
+	@XmlElement(name = "module")
+	private String module;
 
 	/**
 	 * @return the tableName
 	 */
 	public String getTableName() {
-		return tableName;
+		return this.tableName;
 	}
 
 	/**
@@ -56,10 +44,25 @@ public class TableConfiguration implements Serializable {
 	}
 
 	/**
+	 * @return the tablePk
+	 */
+	public String getTablePk() {
+		return this.tablePk;
+	}
+
+	/**
+	 * @param tablePk
+	 *            the tablePk to set
+	 */
+	public void setTablePk(String tablePk) {
+		this.tablePk = tablePk;
+	}
+
+	/**
 	 * @return the tableDesc
 	 */
 	public String getTableDesc() {
-		return tableDesc;
+		return this.tableDesc;
 	}
 
 	/**
@@ -68,5 +71,20 @@ public class TableConfiguration implements Serializable {
 	 */
 	public void setTableDesc(String tableDesc) {
 		this.tableDesc = tableDesc;
+	}
+
+	/**
+	 * @return the module
+	 */
+	public String getModule() {
+		return this.module;
+	}
+
+	/**
+	 * @param module
+	 *            the module to set
+	 */
+	public void setModule(String module) {
+		this.module = module;
 	}
 }

@@ -65,32 +65,32 @@ public final class CodeGen {
 		CFG.setObjectWrapper(new DefaultObjectWrapper(Configuration.getVersion()));
 	}
 
-	private static void process(String tmpName, String projectOutput, String webViewOutput, Map<String, Object> dataMap)
-			throws Exception {
+	private static void process(String tmpName, String projectOutput, String webViewOutput, Map<String, Object> dataMap) throws Exception {
 		String module = dataMap.get("module").toString();
 		String classname = dataMap.get("classname").toString();
+		String _package = dataMap.get("package").toString().replace(".", "/");
 		StringBuilder projectBuilder = new StringBuilder("");
 		StringBuilder webViewBuilder = new StringBuilder("");
 		Template template = CFG.getTemplate(tmpName);
 		int type = TYPES.indexOf(tmpName);
 		switch (type) {
 		case 1:
-			projectBuilder.append(projectOutput).append("/dao/").append(module).append("/");
+			projectBuilder.append(projectOutput).append("/").append(_package).append("/dao/").append(module).append("/");
 			FileUtils.forceMkdir(new File(projectBuilder.toString()));
 			projectBuilder.append(classname).append("Mapper").append(".java");
 			break;
 		case 2:
-			projectBuilder.append(projectOutput).append("/dao/xml/").append(module).append("/");
+			projectBuilder.append(projectOutput).append("/").append(_package).append("/dao/").append(module).append("/mapper/");
 			FileUtils.forceMkdir(new File(projectBuilder.toString()));
 			projectBuilder.append(classname).append("Mapper").append(".xml");
 			break;
 		case 3:
-			projectBuilder.append(projectOutput).append("/service/").append(module).append("/");
+			projectBuilder.append(projectOutput).append("/").append(_package).append("/service/").append(module).append("/");
 			FileUtils.forceMkdir(new File(projectBuilder.toString()));
 			projectBuilder.append(classname).append("Service").append(".java");
 			break;
 		case 4:
-			projectBuilder.append(projectOutput).append("/controller/").append(module).append("/");
+			projectBuilder.append(projectOutput).append("/").append(_package).append("/controller/").append(module).append("/");
 			FileUtils.forceMkdir(new File(projectBuilder.toString()));
 			projectBuilder.append(classname).append("Controller").append(".java");
 			break;
@@ -115,7 +115,7 @@ public final class CodeGen {
 			webViewBuilder.append(FieldCodeUtil.firstCharacterToLower(classname)).append("Detail").append(".jsp");
 			break;
 		default:
-			projectBuilder.append(projectOutput).append("/model/").append(module).append("/");
+			projectBuilder.append(projectOutput).append("/").append(_package).append("/model/").append(module).append("/");
 			FileUtils.forceMkdir(new File(projectBuilder.toString()));
 			projectBuilder.append(classname).append(".java");
 			break;
@@ -155,6 +155,7 @@ public final class CodeGen {
 
 			String module = table.getModule();
 			String classname = FieldCodeUtil.firstCharacterToUpper(FieldCodeUtil.getFieldName(tableName));
+			String id = FieldCodeUtil.getFieldName(table.getTablePk());
 			String moduleDescr = table.getTableDesc();
 			AuthorConfiguration author = configuration.getAuthorConfiguration();
 
@@ -168,6 +169,7 @@ public final class CodeGen {
 			dataMap.put("createDate", createDate);
 			dataMap.put("module", module);
 			dataMap.put("classname", classname);
+			dataMap.put("id", id);
 			dataMap.put("moduleDescr", moduleDescr);
 			dataMap.put("package", packageOutput);
 

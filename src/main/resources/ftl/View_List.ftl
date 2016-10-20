@@ -9,11 +9,10 @@
 	<div class="crumbs">
 		<i class="iconfont">&#xe628;</i>我的菜单<span>&gt;</span>${moduleDescr}管理<span>&gt;</span>${moduleDescr}列表
 	</div>
-	
-	<table class="table vertical-tabs mt10">
-		<tr>
-			<td class="vertical-main">
-				<form name="searchForm" id="searchForm" method="post">
+	<form name="searchForm" id="searchForm" method="post">
+		<table class="table vertical-tabs mt10">
+			<tr>
+				<td class="vertical-main">
 					<h2>
 						<#list tableMetaData.columns as columnMetaData>
 						<span class="ml10">${columnMetaData.columnRemark}：</span> 
@@ -24,22 +23,22 @@
 						<span class="button button-success ml10" id="queryBtn">搜索</span> 
 						<a href="javascript:void(0);" class="button button-success" id="addBtn">新增</a>
 					</h2>
-				</form>
-				<!-- 分页信息 -->
-				<div id="searchFormContent" class="tree-table well3 mt10">
-					<jsp:include page="${instance}PageContent.jsp"></jsp:include>
-				</div>
-			</td>
-		</tr>
-	</table>
+					<!-- 分页信息 -->
+					<div id="searchFormContent" class="tree-table well3 mt10">
+						<jsp:include page="${instance}ListContent.jsp"></jsp:include>
+					</div>
+				</td>
+			</tr>
+		</table>
+	</form>
 	
 	<script type="text/javascript">
 		// 业务代码
 		var locationUrl = 'rs=' + $('#rs').val() + '&prs=' + $('#prs').val();
 		/** 列表查询* */
 		function queryList() {
-			$.ajaxSubmit({
-				url : $('base').attr('href') + '${instance}/${instance}PageContent',
+			$("#searchForm").ajaxSubmit({
+				url : $('base').attr('href') + '${instance}/listContent',
 				type : 'post',
 				dataType : 'html',
 				success : function(data) {
@@ -55,12 +54,12 @@
 		});
 		
 		/** 修改 * */
-		function edit(id) {
-			loadPage('${instance}/info?id=' + id + '&' + locationUrl);
+		function edit(${id}) {
+			loadPage('${instance}/info?${id}=' + ${id} + '&' + locationUrl);
 		}
 		
 		/** 删除 * */
-		function _delete(id) {
+		function _delete(${id}) {
 			
 			layer.confirm('您确认删除该记录？', function() {
 				// 确认
@@ -68,7 +67,7 @@
 					url : $('base').attr('href') + '${instance}/delete',
 					type : 'post',
 					data : {
-						id : id
+						${id} : ${id}
 					},
 					dataType : 'json',
 					success : function(data) {
@@ -92,8 +91,8 @@
 		}
 		
 		/** 详情 * */
-		function detail(id) {
-			loadPage('${instance}/detail/' + id + '?' + locationUrl);
+		function detail(${id}) {
+			loadPage('${instance}/detail/' + ${id} + '?' + locationUrl);
 		}
 	</script>
 </div>
