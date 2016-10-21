@@ -11,7 +11,7 @@
 	<i class="iconfont">&#xe628;</i>我的菜单<span>&gt;</span>${moduleDescr}管理<span>&gt;</span>${moduleDescr}信息
 </div>
 
-<h2>${tableMetaData.tableRemark!""}信息</h2>
+<h2>${moduleDescr}信息</h2>
 <div class="well2">
 	<div class="form-horizontal">
 		<#list tableMetaData.columns as columnMetaData>

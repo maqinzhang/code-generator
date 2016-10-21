@@ -9,6 +9,7 @@
 <table class="table table-bordered table-hover center mt10">
 	<thead>
 		<tr>
+			<th><input type="checkbox" id="checkAll"/></th>
 			<#list tableMetaData.columns as columnMetaData>
 			<th>${columnMetaData.columnRemark}</th>
 			</#list>
@@ -20,6 +21,7 @@
 			<c:when test="${r"${ !empty page.list }"}">
 				<c:forEach items="${r"${page.list }"}" var="record">
 					<tr>
+						<td><input type="checkbox" name="checkbox" value="${r"${record."}${id}${r"}"}"/></td>
 						<#list tableMetaData.columns as columnMetaData>
 						<td>${r"${record."}${columnMetaData.fieldName}}</td>
 						</#list>
@@ -42,4 +44,4 @@
 	</tbody>
 </table>
 
-<diy:page formId="searchForm" async="true" pageSize="${r"${page.pageSize}"}" page="${r"${page}"}" gotoURI="${instance}/${instance}ListContent"></diy:page>
+<diy:page formId="searchForm" async="true" pageSize="${r"${page.pageSize}"}" page="${r"${page}"}" gotoURI="${instance}/listContent"></diy:page>

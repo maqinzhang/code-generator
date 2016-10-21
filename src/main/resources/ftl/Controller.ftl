@@ -1,13 +1,12 @@
 package ${package}.controller.${module};
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
 
-import org.apache.commons.lang3.StringUtils;
-import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -17,6 +16,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import tk.mybatis.mapper.entity.Condition;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
@@ -34,7 +35,7 @@ import ${package}.service.${module}.${classname}Service;
 <#assign instance = "${classname?uncap_first}">
 <#assign _id = "${id?cap_first}">
 @Controller
-@RequestMapping("/${module?replace('.', '/')}")
+@RequestMapping("/${instance?replace('.', '/')}")
 public class ${classname}Controller {
 
     private Logger LOG = LoggerFactory.getLogger(getClass());
@@ -75,7 +76,7 @@ public class ${classname}Controller {
 			model.addAttribute("pageSize", pageSize);
 			model.addAttribute("page", page);
 		} catch (Exception e) {
-			LOG.error("查询列表出错!", e);
+			LOG.error("查询${moduleDescr}列表出错!", e);
 		}
       	return VIEW_TO_LIST;
     }
@@ -104,7 +105,7 @@ public class ${classname}Controller {
 			model.addAttribute("pageSize", pageSize);
 			model.addAttribute("page", page);
 		} catch (Exception e) {
-			LOG.error("更新列表内容出错!", e);
+			LOG.error("更新${moduleDescr}列表内容出错!", e);
 		}
 		return VIEW_TO_LIST_CONTENT;
     }
@@ -114,7 +115,7 @@ public class ${classname}Controller {
      * 跳转到新增、修改信息页面
      */
     @RequestMapping("/info")
-    public Object info(Object ${id}, Model model) throws Exception {
+    public Object info(String ${id}, Model model) throws Exception {
     	try {
 			${classname} ${instance} = new ${classname}();
 			
@@ -130,7 +131,7 @@ public class ${classname}Controller {
 			
 			model.addAttribute("${instance}", ${instance});
 		} catch (Exception e) {
-			LOG.error("跳转到新增、修改信息页面出错!", e);
+			LOG.error("跳转到新增、修改${moduleDescr}信息页面出错!", e);
 		}
 		return VIEW_TO_INFO;
 	}
@@ -161,7 +162,7 @@ public class ${classname}Controller {
 			}
 			resMap.put("success", true);
 		} catch (Exception e) {
-			LOG.error("保存信息出错!", e);
+			LOG.error("保存${moduleDescr}信息出错!", e);
 			resMap.put("msg", e);
 			resMap.put("success", false);
 		}
@@ -173,20 +174,21 @@ public class ${classname}Controller {
      */
     @RequestMapping("/delete")
     @ResponseBody
-    public Object delete(Object ${id}) throws Exception {
+    public Object delete(String ${id}) throws Exception {
     	
 		Map<String, Object> resMap = new HashMap<String, Object>();
 			
 		try {
-			if (!ObjectUtils.isEmpty(${id})) {
-				/**
-				 * 删除记录
-				 */
-				${instance}Service.deleteById(${id});
+			if (ObjectUtils.isEmpty(${id})) {
+				throw new IllegalArgumentException("请传入正确的${id}！");
 			}
+			/**
+			 * 删除记录
+			 */
+			${instance}Service.deleteById(${id});
 			resMap.put("success", true);
 		} catch (Exception e) {
-			LOG.error("删除信息出错!", e);
+			LOG.error("删除${moduleDescr}信息出错!", e);
 			resMap.put("msg", e);
 			resMap.put("success", false);
 		}
@@ -194,15 +196,45 @@ public class ${classname}Controller {
     }
     
     /**
+	 * 批量删除信息
+	 */
+	@RequestMapping("/batchDelete")
+	@ResponseBody
+	public Object batchDelete(String ${id}s) throws Exception {
+
+		Map<String, Object> resMap = new HashMap<String, Object>();
+
+		try {
+			if (ObjectUtils.isEmpty(${id}s)) {
+				throw new IllegalArgumentException("请传入正确的${id}！");
+			}
+			String[] _${id}s = ${id}s.split(",");
+			
+			/**
+			 * 删除记录
+			 */
+			Condition condition = new Condition(${classname}.class);
+			condition.createCriteria().andIn("${id}", Arrays.asList(_${id}s));
+			appLoginRecordService.deleteByCondition(condition);
+			
+			resMap.put("success", true);
+		} catch (Exception e) {
+			LOG.error("批量删除${moduleDescr}信息出错!", e);
+			resMap.put("msg", e);
+			resMap.put("success", false);
+		}
+		return resMap;
+	}
+    
+    /**
 	 * 查询详情
 	 */
 	@RequestMapping("/detail/{${id}}")
-	public String detail(@PathVariable Object ${id}, Model model) {
+	public String detail(@PathVariable String ${id}, Model model) {
 		try {
 			if (ObjectUtils.isEmpty(${id})) {
 				throw new IllegalArgumentException("请传入正确的${id}！");
 			}
-	
 			/**
 			 * 获取记录
 			 */
@@ -210,7 +242,7 @@ public class ${classname}Controller {
 	
 			model.addAttribute("${instance}", ${instance});
 		} catch (Exception e) {
-			LOG.error("查询详情出错！", e);
+			LOG.error("查询${moduleDescr}详情出错！", e);
 		}
 		return VIEW_TO_DETAIL;
 	}
