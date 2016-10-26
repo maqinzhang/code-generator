@@ -215,7 +215,7 @@ public class ${classname}Controller {
 			 */
 			Condition condition = new Condition(${classname}.class);
 			condition.createCriteria().andIn("${id}", Arrays.asList(_${id}s));
-			appLoginRecordService.deleteByCondition(condition);
+			${instance}Service.deleteByCondition(condition);
 			
 			resMap.put("success", true);
 		} catch (Exception e) {
