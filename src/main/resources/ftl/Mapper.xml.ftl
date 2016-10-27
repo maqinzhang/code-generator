@@ -5,7 +5,7 @@
 <mapper namespace="${package}.dao.${module}.${classname}Mapper">
 	<resultMap id="BaseResultMap" type="${package}.model.${module}.${classname}">
 		<#list tableMetaData.columns as columnMetaData>
-		<result column="${columnMetaData.columnName}" property="${columnMetaData.fieldName}"/>
+		<result column="${columnMetaData.columnName}" property="${columnMetaData.fieldName}" />
 		</#list>
 	</resultMap>
 </mapper>
