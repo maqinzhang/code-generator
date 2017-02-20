@@ -21,9 +21,9 @@
 			-->
 			<#list tableMetaData.columns as columnMetaData>
 			<div class="row mt10 ">
-				<label class="control-label">${columnMetaData.columnRemark}：</label>
+				<label for="${columnMetaData.fieldName}" class="control-label">${columnMetaData.columnRemark}：</label>
 				<div class="controls">
-					<input type="text" class="input input-large" name="${columnMetaData.fieldName}" value="${r"${"}${instance}.${columnMetaData.fieldName} }">
+					<input type="text" class="input input-large" id="${columnMetaData.fieldName}" name="${columnMetaData.fieldName}" value="${r"${"}${instance}.${columnMetaData.fieldName} }">
 					<span style="color: red;">* </span><a style="color: #999999; text-decoration: none;"></a>
 				</div>
 			</div>
